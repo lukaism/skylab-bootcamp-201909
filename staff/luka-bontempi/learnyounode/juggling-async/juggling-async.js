@@ -67,18 +67,19 @@
 
 
  /* buggy one */
-// debugger
-// const http = require('http')
-// var info =["","",""]
-// for (let i=2;i<process.argv.length;i++){
-//     http.get(process.argv[i], result => {
-//         result.setEncoding('utf8')
-//         result.on('data', data =>{
-//             info[i-2] += data
-//         })
-//         result.on('error', console.error)
-//         result.on('end', () =>{
-//             console.log(info[i-2])
-//         })
-//     })
-// }
+debugger
+const http = require('http')
+counter = 0
+var info =["","",""]
+for (let i=2;i<process.argv.length;i++){
+    http.get(process.argv[i], result => {
+        result.setEncoding('utf8')
+        result.on('data', data =>{
+            info[i-2] += data
+        })
+        result.on('error', console.error)
+        result.on('end', () =>{
+            ++counter === process.argv.length-2 && info.forEach(output => console.log(output))
+        })
+    })
+}
