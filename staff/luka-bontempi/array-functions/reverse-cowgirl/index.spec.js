@@ -1,4 +1,4 @@
-describe('reverse', function(){
+describe('reversecowgirl', function(){
 
     
     it('Should succeed the operation, reversing the first item of the array to the last item and viceversa', function(){
@@ -6,7 +6,7 @@ describe('reverse', function(){
 
         array = [1, 2, 3, 4];
         expected = [4, 3, 2, 1];
-        result = reverse(array);
+        result = reversecowgirl(array);
 
         console.log(array);
         console.log(result);
@@ -21,7 +21,7 @@ describe('reverse', function(){
 
         array = [1];
         expected = [1];
-        result = reverse(array);
+        result = reversecowgirl(array);
 
         console.log(array);
         console.log(result);
@@ -36,7 +36,7 @@ describe('reverse', function(){
 
         array = [];
         expected = [];
-        result = reverse(array);
+        result = reversecowgirl(array);
 
         console.log(array);
         console.log(result);
