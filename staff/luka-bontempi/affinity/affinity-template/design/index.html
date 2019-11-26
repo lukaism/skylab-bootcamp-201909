@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a44e950e5b.js" crossorigin="anonymous"></script>
+    <title>Affinity</title>
+</head>
+
+<body>
+    <header>
+
+    </header>
+
+    <!-- register/-->
+    <section class="view register">
+        <form class="register__form">
+            <h1 class="register__title">Register</h1>
+            <input class="register__field" type="text" name="name" placeholder="name">
+            <input class="register__field" type="text" name="surname" placeholder="surname">
+            <input class="register__field" type="email" name="email" placeholder="e-mail">
+            <input class="register__field" type="username" name="surname" placeholder="surname">
+            <input class="register__field" type="password" name="password" placeholder="password">
+            <button class="register__submit "><i class="fas fa-sign-in-alt"></i></button>
+        </form>
+
+        <section class="feedback _hiden">
+            <span class="feedback__icon">👻</span>
+            <p class="feedback__message">Something went wrong</p>
+            <span class="feedback__icon">👻</span>
+        </section>
+    </section>
+
+    <!-- login/-->
+    <section class="view login">
+        <form class="login__form">
+            <h1 class="login__title">Login</h1>
+            <input class="login__field" type="email" name="email" placeholder="e-mail">
+            <input class="login__field" type="password" name="password" placeholder="password">
+            <button class="login__submit "><i class="fas fa-key"></i></button>
+        </form>
+
+        <section class="feedback _hiden">
+            <span class="feedback__icon">👻</span>
+            <p class="feedback__message">Something went wrong</p>
+            <span class="feedback__icon">👻</span>
+        </section>
+    </section>
+
+    <!-- profile scroller/-->
+    <section class="view profile">
+        <button class="logout "><i class="fas fa-sign-out-alt"></i></button>
+        <div class="profile__info"></div>
+        <div class="profile__geometric shape"></div>
+        <img class="profile__image" src="https://cdn.pixabay.com/photo/2017/03/25/18/06/color-2174065__340.png" alt="">
+        <h2 class="profile__name">Some dude</h2>
+        <h2 class="profile__age">31</h2>
+
+        <section class="buton">
+            <button class="buton__directions  ">My profile</button>
+            <button class="buton__directions ">Filter preferences</button>
+            <button class="buton__directions ">Chats</button>
+        </section>
+
+    </section>
+
+    <!-- my profile/-->
+    <section class="view my-profile">
+        <section class="my-profile__header">
+            <button class="my-profile__edit"><i class="fas fa-user edit-icon"></i></button>
+            <h1 class="my-profile__title">My Profile</h1>
+            <button class="logout"><i class="fas fa-sign-out-alt"></i></button>
+        </section>
+        <div class="my-profile__info">
+            <div class="my-profile__geometric shape"></div>
+            <img class="my-profile__image" src="https://cdn.pixabay.com/photo/2017/03/25/18/06/color-2174065__340.png"
+                alt="">
+        </div>
+        <h3 class="my-profile__name">Mariel</h3>
+        <h4 class="my-profile__age">26</h4>
+
+        <section class="buton">
+            <button class="buton__directions ">My profile</button>
+            <button class="buton__directions ">Filter preferences</button>
+            <button class="buton__directions ">Chats</button>
+        </section>
+
+    </section>
+    <!-- edit profile/-->
+    <section class="view edit-profile">
+        <button class="logout "><i class="fas fa-sign-out-alt"></i></button>
+        <h1 class="my-profile__title">Edit Profile</h1>
+        <h3 class="my-profile__name">Mariel</h3>
+        <div class="my-profile__geometric shape"></div>
+        </br></br>
+        <p>first interest</p>
+        <div class=" edit-profile__slidecontainer slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider slidecontainer__slider" />
+            <button class="edit-profile__remove"><i class="fas fa-eraser"></i></button>
+        </div>
+        <p>second interest</p>
+        <div class=" edit-profile__slidecontainer slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider slidecontainer__slider" />
+            <button class="edit-profile__remove"><i class="fas fa-eraser"></i></button>
+        </div>
+        <p>third interest</p>
+        <div class=" edit-profile__slidecontainer slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider slidecontainer__slider" />
+            <button class="edit-profile__remove"><i class="fas fa-eraser"></i></button>
+        </div>
+        <br>
+        <button class="edit-profile__add-interest"><i class="fas fa-plus-circle"></i></button>
+        <br>
+        <form class="edit-profile__form">
+            <h4 class="edit-profile__title">Basic info</h4>
+            <input class="edit-profile__field" type="text" name="name" placeholder="name">
+            <input class="edit-profile__field" type="text" name="surname" placeholder="surname">
+            <input class="edit-profile__field" type="email" name="email" placeholder="e-mail">
+            <input class="edit-profile__field" type="username" name="surname" placeholder="surname">
+        </form>
+        <br><br>
+
+
+        <h4>Birthday</h4>
+        <form class="edit-profile__birthday">
+            <select class="selector__day">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <select class="selector__month">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <input type="number" min="1900" max="2020" step="1" value="2016" />
+        </form>
+
+        <section class="buton">
+            <button class="buton__directions ">My profile</button>
+            <button class="buton__directions ">Filter preferences</button>
+            <button class="buton__directions ">Chats</button>
+        </section>
+
+    </section>
+
+    <!-- filter preferences/-->
+
+    <section class="view filter-preferences">
+        <button class="logout"><i class="fas fa-sign-out-alt"></i></button>
+        <h1 class="filter-preferences__title">Filter settings</h1>
+        <section class="filter-preferences__selector">
+            <h4 class="filter-preferences__option">Show me</h4>
+            <br>
+            <select class="selector__gender">
+                <option value="women">Women</option>
+                <option value="men">Men</option>
+                <option value="everyone">Everyone</option>
+            </select>
+            <br><br><br>
+            <h4 class="filter-preferences__option">Show only similar profiles</h4>
+            <br>
+            <label class="filter-preferences__switch switch">
+                <input type="checkbox">
+                <span class="sliderswitch round"></span>
+            </label>
+        </section>
+
+        <section class="buton">
+            <button class="buton__directions ">My profile</button>
+            <button class="buton__directions ">Filter preferences</button>
+            <button class="buton__directions ">Chats</button>
+        </section>
+
+    </section>
+
+    <!-- chat/-->
+    <section class="view chat hide">
+        <button class="logout"><i class="fas fa-sign-out-alt"></i></button>
+        <h1 class="chat__title">Chat</h1>
+        <button class="chat__back"><i class="fas fa-home"></i></button>
+        <h2 class="chat__name">Mariel</h2>
+        <h4 class="chat__age">26</h4>
+
+        <section class="buton">
+            <button class="buton__directions ">My profile</button>
+            <button class="buton__directions ">Filter preferences</button>
+            <button class="buton__directions ">Chats</button>
+        </section>
+    </section>
+
+
+
+</body>
+
+</html>
+
+<!--  logout -->
