@@ -1,3 +1,5 @@
+@import ./switch
+@import ./range-slider
 *
     box-sizing: border-box
     margin: 0
@@ -8,13 +10,11 @@ body
     height: 100%
     width: 100%
 
-.hide
-    display: none
-
 .view
     display: flex
     flex-direction: column
     align-items: center
+    justify-content: space-between
     border: .3rem solid orange
     border-style: dotted
     background-size: cover
@@ -33,16 +33,16 @@ body
     background: radial-gradient(circle closest-side, black, red)
     opacity: .3
     &__icon
-        font-size: 1.5rem
+        font-size: 100%
 
     &__message
-        display: inline
+        display: inline1
         color: white
-        font-size: 1.5rem
+        font-size: 100%
 
     /* register */
 .register
-    background-image: url("https://images.unsplash.com/photo-1492176273113-2d51f47b23b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80")
+    background-image: url("https://images.unsplash.com/photo1-15422722101-b1ca555f8505?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80")
     background-size: cover
     border: .3rem solid black
     padding: .5rem
@@ -51,7 +51,7 @@ body
         margin-top: 60%
     &__title
         color: black
-        font-size: 2rem
+        font-size: 100%
         margin: .5rem auto .5rem auto
     &__field
         border-radius: .5rem
@@ -63,7 +63,7 @@ body
 
     /* login */
 .login
-    background-image: url("https://images.unsplash.com/photo-1536300995586-2c63143ea13f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80")
+    background-image: url("https://images.unsplash.com/photo-1533013404834-c196f079ca57?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80")
     background-size: cover
     border: .3rem solid black
     padding: .5rem
@@ -76,87 +76,12 @@ body
         margin: .5rem auto .5rem auto
     &__field
         border-radius: 0.5rem
-        padding: 0.5rem
+        padding: .5rem
         font-size: 1rem
     &__submit
         border-radius: .5rem
         padding: .5rem
-
-    /* profile scroller */
-.profile
-    background-image: url("https://images.unsplash.com/photo-1492176273113-2d51f47b23b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80")
-    background-size: cover
-    border: .3rem solid black
-    padding: .5rem
-    &__title
-        color: black
-        font-size: 2rem
-        margin: .5rem auto .5rem auto
-    &__name
-        font-size: 1rem
-    &__age
-        font-size: .5rem
-    &__geometric
-        position: relative
-        top: 50%
-        opacity: 0.3
-
-.shape
-    display: grid
-    grid-template-columns: repeat(auto-fit, minmax(5vw, 1fr))
-    grid-auto-rows: 5vw
-    grid-auto-flow: dense
-    &__fragment
         
-
-
-    /*my profile*/
-.my-profile
-    background-image: url("https://images.unsplash.com/photo-1536300995586-2c63143ea13f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80")
-    background-size: cover
-    border: .3rem solid black
-    padding: .5rem
-    &__title
-        color: black
-        font-size: 2rem
-        margin: .5rem auto .5rem auto
-    &__name
-        font-size: 1rem
-    &__age
-        font-size: .5rem
-    &__geometric
-        position: relative
-        top: 50%
-        width: 60%
-        height: auto
-        opacity: 0.3
-    &__edit
-        border: .3rem solid black
-        border-radius: .5rem
-        padding: .5rem
-        font-size: 0.7rem
-        position: relative
-        top: 0
-        rigth: 0
-        opacity: 0
-
-.edit-icon
-    opacity: 1
-    background: black
-
-.filter-preferences
-    background-image: url("https://images.unsplash.com/photo-1536300995586-2c63143ea13f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80")
-    background-size: cover
-    border: .3rem solid black
-    padding: .5rem
-    &__title
-        color: black
-        font-size: 2rem
-        margin: .5rem auto .5rem auto
-
-.selector__gender
-    border: .3rem solid black
-
 .logout
     border: .3rem solid black
     align-content: flex-end
@@ -167,6 +92,125 @@ body
     position: relative
     margin-top: 3%
     margin-left: 80%
+
+    /* profile scroller */
+.profile
+    background-image: url("https://images.unsplash.com/photo1-15174953106984-f84210f9daa8?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80")
+    background-size: cover
+    border: .3rem solid black
+    padding: .5rem
+    &__title
+        color: black
+        font-size: 2rem
+        margin: .5rem auto .5rem auto
+    &__name
+        font-size: 300%
+    &__age
+        font-size: 200%
+    &__geometric
+        position: relative
+        top: 50%
+        opacity: 0.3
+    &__image
+        width: 100%
+
+.shape
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(5vw, 1fr))
+    grid-auto-rows: 5vw
+    grid-auto-flow: dense
+    &__fragment
+        width: 30vw
+
+    /*my profile*/
+.my-profile
+    background-image: url("https://images.unsplash.com/photo1-15174953106984-f84210f9daa8?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80")
+    background-size: cover
+    border: .3rem solid black
+    padding: .5rem
+    &__header
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+    &__title
+        color: black
+        font-size: 2rem
+        margin: .5rem auto .5rem auto
+    &__name
+        font-size: 300%
+    &__age
+        font-size: 200%
+    &__geometric
+        position: relative
+        top: 50%
+        width: 60%
+        height: auto
+        opacity: 0.3
+    &__edit
+        border: .3rem solid black
+        border-radius: .5rem
+        padding: .5rem
+        font-size: 100%
+        position: relative
+        margin-top: 3%
+        margin-left: 20%
+        opacity: 1
+    &__image
+        width: 100%
+
+.edit-icon
+    opacity: 1
+    background: black
+
+.edit-profile
+    background-image: url("https://images.unsplash.com/photo1-15130027149550-c59d786b8e6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80")
+    background-size: cover
+    border: .3rem solid black
+    padding: .5rem
+    &__title
+        color: black
+        font-size: 100%
+        margin-top: 3%
+        margin-left: 50%
+    &__name
+        font-size: 300%
+    &__age
+        font-size: 200%
+    &__geometric
+        position: relative
+        top: 50%
+        width: 60%
+        height: auto
+        opacity: 0.3
+    &__slidecontainer
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+    &__remove
+        border: .3rem solid black
+        position: relative
+        margin-left: 5vw
+        background: white
+        border-radius: 20%
+    &__add-interest
+        border: .3rem solid black
+        background: white
+        border-radius: 20%
+
+.filter-preferences
+    background-image: url("https://images.unsplash.com/photo1-15130027149550-c59d786b8e6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80")
+    background-size: cover
+    border: .3rem solid black
+    padding: .5rem
+    justify-content: space-between
+    &__title
+        color: black
+        font-size: 2rem
+        margin: .5rem auto .5rem auto
+
+.selector__gender
+    border: .3rem solid black
+
 
 .buton
     display: grid
@@ -184,4 +228,5 @@ body
         font-size: 100%
         height: 8vh
 
-@import ./switch
+.hide
+    display: none
