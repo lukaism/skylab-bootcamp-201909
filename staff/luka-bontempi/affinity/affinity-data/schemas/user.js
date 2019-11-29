@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose')
-const { validators: { isEmail } } = require('tasks-util')
+const { validators: { isEmail } } = require('../../affinity-util')
 
 module.exports = new Schema({
     name: {
@@ -24,9 +24,13 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    details: {
-        type: String,
+    birthdate: {
+        type: Date,
         required: true
+    },
+    description: {
+        type: String,
+        
     },
     genderId: {
         type: String,
@@ -34,7 +38,31 @@ module.exports = new Schema({
     },
     geometric: {
         type: Array,
-        required: true
+        
+    },
+    candidates: {
+        type: Array,
+        default: []
+        
+    },
+    rejected: {
+        type: Array,
+        default: []
+    },
+    aproved: {
+        type: Array,
+        default: []
+    },
+    connections: {
+        type: Array,
+        default: []
+    },
+    loc: {
+        type: { type: String },
+        coordinates: [Number],
+    },
+    radius: {
+        type: Number,
     },
     lastAccess: {
         type: Date
