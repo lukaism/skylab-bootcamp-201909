@@ -108,5 +108,5 @@ describe('logic - retrieve-complete-user', () => {
     })
 
 
-    after(() => User.deleteMany().then(database.disconnect))
+    after(() => Promise.all([User.deleteMany(), Chat.deleteMany()]).then(database.disconnect))
 })
