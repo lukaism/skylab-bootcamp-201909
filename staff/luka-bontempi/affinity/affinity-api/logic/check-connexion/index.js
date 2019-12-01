@@ -1,22 +1,30 @@
 const { validate, errors: { NotFoundError, ContentError } } = require('affinity-util')
 const { ObjectId, models: { User } } = require('affinity-data')
 
-module.exports = function (id) {
-    validate.string(id)
-    validate.string.notVoid('id', id)
-    if (!ObjectId.isValid(id)) throw new ContentError(`${id} is not a valid id`)
+module.exports = function (id1,id2) {
+    validate.string(id1)
+    validate.string.notVoid('id1', id1)
+    if (!ObjectId.isValid(id1)) throw new ContentError(`${id1} is not a valid id`)
+    validate.string(id2)
+    validate.string.notVoid('id2', id2)
+    if (!ObjectId.isValid(id)) throw new ContentError(`${id2} is not a valid id`)
 
     return (async () => {
-        const user = await User.findById(id)
+        const user = await User.findById(id1)
+        const possibleconnection = await User.findById(id2)
 
         if (!user) throw new NotFoundError(`user with id ${id} not found`)
+        if (!possibleconnection) throw new NotFoundError(`user with id ${id} not found`)
+        if (possibleconnection.aproved.includes(id1)){
+            user.connections.push(id2)
+            user.lastAccess = new Date
+            possibleconnection.connections.push(id1)
+            possibleconnection.lastAccess = new Date
+    
+            await user.save()
+            await possibleconnection.save()
+        }
+        
 
-        user.lastAccess = new Date
-
-        await user.save()
-
-        const { name, surname, email, username, lastAccess, genderId, description, geometric, birthdate } = user.toObject()
-
-        return { id, name, surname, email, username, genderId, description, lastAccess, geometric, birthdate }
     })()
 }

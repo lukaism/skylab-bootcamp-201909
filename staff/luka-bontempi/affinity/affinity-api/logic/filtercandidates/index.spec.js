@@ -2,16 +2,16 @@ require('dotenv').config()
 const { env: { TEST_DB_URL } } = process
 const { expect } = require('chai')
 const { random } = Math
-const getCandidates = require('.')
+const filterCandidates = require('.')
 const { errors: { NotFoundError } } = require('affinity-util')
 const { database, models: { User } } = require('affinity-data')
 
 
-describe('logic - get candidates', () => {
+describe('logic - filter candidates', () => {
     before(() => database.connect(TEST_DB_URL))
 
 
-    let name, surname, email, username, genderId, description, geometric, password, birthdate, location, coordinates, radius, insertions
+    let name, surname, email, username, genderId, description, geometric, password, birthdate, location, coordinates, radius, insertions, userio
 
     beforeEach(async () => {
         name = `namehongda-${random()}`
@@ -30,10 +30,12 @@ describe('logic - get candidates', () => {
 
         await User.deleteMany()
 
-        const user = await User.create({ name, surname, email, username, genderId, description, geometric, password, birthdate, location: { type: "Point", coordinates: coordinates }, radius })
+        const userio = await User.create({ name, surname, email, username, genderId, description, geometric, password, birthdate, location: { type: "Point", coordinates: coordinates }, radius })
 
 
-        id = user.id
+        userio.id = userio._id.toString()
+        delete userio._id
+
         userIds = []
         names = []
         surnames = []
@@ -52,11 +54,8 @@ describe('logic - get candidates', () => {
         for (let i = 0; i < 20; i++) {
 
             coordinates = [41 + random(), 2 + random()]
-            // if (i > 9) {
-            //     coordinates[0] += (i*4 + 1) / 10
-            //     coordinates[1] += (i*4 + 1) / 10
-                
-            // }
+                        
+           
             const user = {
                 name: `name-${random()}`,
                 surname: `surname-${random()}`,
@@ -71,8 +70,7 @@ describe('logic - get candidates', () => {
                 radius: 4
             }
             
-            insertions.push(user)
-
+           
             names.push(user.name)
             surnames.push(user.surname)
             emails.push(user.email)
@@ -85,37 +83,43 @@ describe('logic - get candidates', () => {
             locations.push(user.location)
             radiuses.push(user.radius)
         }
+        debugger
 
         await User.insertMany(insertions)
+        // insertions.forEach(candidate => {
+        //     candidate.id = candidate._id.toString()
+        //     delete candidate._id
+        // })
 
     })
 
-    it('should succeed on correct user id', async () => {
-        const candidates = await getCandidates(id)
+    it('should succeed on correct user and correct candidates', async () => { debugger
 
-        expect(candidates).to.exist
-        expect(candidates).to.be.an('array')
-        expect(candidates).to.have.deep.members(insertions)
-        candidates.forEach(elem => expect(elem).to.be.an('object'))
+        const truecandidates = await filterCandidates(userio, insertions)
+
+        expect(truecandidates).to.exist
+        expect(truecandidates).to.be.an('array')
+        expect(truecandidates).to.have.deep.members(insertions)
+        truecandidates.forEach(elem => expect(elem).to.be.an('object'))
         // candidates.forEach(elem => expect(insertions).to.contain(elem))
 
     })
 
 
 
-    it('should fail on wrong user id', async () => {
-        const id = '012345678901234567890123'
+    // it('should fail on wrong user id', async () => {
+    //     const id = '012345678901234567890123'
 
-        try {
-            await getCandidates(id)
+    //     try {
+    //         await filterCandidates(user)
 
-            throw Error('should not reach this point')
-        } catch (error) {
-            expect(error).to.exist
-            expect(error).to.be.an.instanceOf(NotFoundError)
-            expect(error.message).to.equal(`user with id ${id} not found`)
-        }
-    })
+    //         throw Error('should not reach this point')
+    //     } catch (error) {
+    //         expect(error).to.exist
+    //         expect(error).to.be.an.instanceOf(NotFoundError)
+    //         expect(error.message).to.equal(`user with id ${id} not found`)
+    //     }
+    // })
 
     // TODO other cases
 

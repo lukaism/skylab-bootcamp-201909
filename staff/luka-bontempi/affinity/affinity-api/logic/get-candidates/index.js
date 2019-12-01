@@ -8,21 +8,26 @@ module.exports = function (id) {
 
     return (async () => {
         const user = await User.findById(id)
+        debugger
 
         if (!user) throw new NotFoundError(`user with id ${id} not found`)
-        const { location } = user.toObject() 
-        const { radius } = user.toObject()
-        const candidates = await User.find({location: {$nearSphere: { $geometry: { type: "point", coordinates: location},$maxDistance: radius}}} ).lean()
+        const { location: { coordinates }, radius } = user
+        const candidates = await User.find({ _id: { $nin: id }, location: { $nearSphere: { $geometry: { type: "Point", coordinates: coordinates }, $maxDistance: radius * 1000 } } })
 
+        let candodotes = []
         candidates.forEach(candidate => {
-            task.id = candidate._id.toString()
+            candidate.id = candidate._id.toString()
             delete candidate._id
+            const { name, surname, email, username, genderId, description, geometric, password, birthdate, location: { coordinates }, radius } = candidate
+            candidate = { name, surname, email, username, genderId, description, geometric, password, birthdate, location: { type: "Point", coordinates: coordinates }, radius }
+            candodotes.push(candidate)
+        }
+       )
 
-            candidate.user = id
-        })
-        user.candidates = candidates
-        user.lastAccess = new Date
+    user.lastAccess = new Date
 
-        await user.save()
-    })()
+    await user.save()
+
+    return candodotes
+}) ()
 }

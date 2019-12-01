@@ -21,5 +21,6 @@ module.exports = function (id1,id2) {
         
 
         await user.save()
+        return user
     })()
 }

@@ -9,7 +9,7 @@ const { database, models: { User } } = require('affinity-data')
 describe('logic - register user', () => {
     before(() => database.connect(TEST_DB_URL))
 
-    let name, surname, email, username, genderId, password, birthdate, candidates, rejected, aproved, connections
+    let name, surname, email, username, genderId, password, birthdate
 
     beforeEach(() => {
         name = `name-${random()}`
@@ -19,10 +19,7 @@ describe('logic - register user', () => {
         genderId = `genderId-${random()}`
         password = `password-${random()}`
         birthdate = new Date
-        candidates = []
-        rejected = []
-        aproved = []
-        connections = []
+        
 
         return User.deleteMany()
     })
@@ -43,10 +40,7 @@ describe('logic - register user', () => {
         expect(user.password).to.equal(password)
         expect(user.genderId).to.equal(genderId)
         expect(user.birthdate).to.deep.equal(birthdate)
-        expect(user.candidates).to.deep.equal(candidates)
-        expect(user.rejected).to.deep.equal(rejected)
-        expect(user.aproved).to.deep.equal(aproved)
-        expect(user.connections).to.deep.equal(connections)
+        
     })
 
     describe('when user already exists', () => {
