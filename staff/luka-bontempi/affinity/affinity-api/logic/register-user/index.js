@@ -1,7 +1,7 @@
 const { validate, errors: { ConflictError } } = require('affinity-util')
 const { models: { User } } = require('affinity-data')
 
-module.exports = function (name, surname, email, username, genderId, password, birthdate) {
+module.exports = function (name, surname, email, username, genderId, password, day, month, year) { debugger
     validate.string(name)
     validate.string.notVoid('name', name)
     validate.string(surname)
@@ -14,7 +14,15 @@ module.exports = function (name, surname, email, username, genderId, password, b
     validate.string.notVoid('genderId', genderId)
     validate.string(password)
     validate.string.notVoid('password', password)
-    validate.object(birthdate)
+    validate.string(day)
+    validate.string.notVoid('day', day)
+    validate.string(month)
+    validate.string.notVoid('month', month)
+    validate.string(year)
+    validate.string.notVoid('year', year)
+    
+
+
     
 
 
@@ -22,6 +30,8 @@ module.exports = function (name, surname, email, username, genderId, password, b
         const user = await User.findOne({ username })
 
         if (user) throw new ConflictError(`user with username ${username} already exists`)
+        
+        const birthdate = new Date(year, month-1, day)
 
         await User.create({ name, surname, email, username, genderId, password, birthdate })
     })()

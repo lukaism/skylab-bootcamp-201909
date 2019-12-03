@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { registerUser, authenticateUser, retrieveUser } = require('../../logic')
+const { registerUser, authenticateUser, retrieveUser, modifyUser, updateLocation, rejectCandidate, aproveCandidate, checkConnection, getCandidates } = require('../../logic')
 const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const tokenVerifier = require('../../helpers/token-verifier')(SECRET)
@@ -11,10 +11,10 @@ const jsonBodyParser = bodyParser.json()
 const router = Router()
 
 router.post('/', jsonBodyParser, (req, res) => {
-    const { body: { name, surname, email, username, password } } = req
+    const { body: {name, surname, email, username, genderId, password, day, month, year } } = req
 
     try {
-        registerUser(name, surname, email, username, password)
+        registerUser(name, surname, email, username, genderId, password, day, month, year)
             .then(() => res.status(201).end())
             .catch(error => {
                 const { message } = error
@@ -72,5 +72,166 @@ router.get('/', tokenVerifier, (req, res) => {
         res.status(400).json({ message })
     }
 })
+
+router.patch('/edit', tokenVerifier,jsonBodyParser, (req, res) => {
+    try {
+        const { id, body: { name, surname, genderId, geometric, description, day, month, year} } = req
+
+        modifyUser(id, name, surname, genderId, geometric, description, day, month, year, radius)
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
+        res.status(400).json({ message })
+    }
+})
+
+router.patch('/uplocation', tokenVerifier,jsonBodyParser, (req, res) => {
+    try {
+        debugger
+        const { id, body:{location} } = req
+        
+
+        updateLocation(id, location )
+            .then(() => res.status(200).json({message:'Todo bien'}))
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
+        res.status(400).json({ message })
+    }
+})
+
+router.patch('/reject', tokenVerifier,jsonBodyParser, (req, res) => {
+    try {
+        const { id, id1 } = req
+
+        rejectCandidate(id, id1 )
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
+        res.status(400).json({ message })
+    }
+})
+
+router.patch('/aprove', tokenVerifier,jsonBodyParser, (req, res) => {
+    try {
+        const { id, id1 } = req
+
+        aproveCandidate(id, id1 )
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
+        res.status(400).json({ message })
+    }
+})
+
+router.patch('/check', tokenVerifier,jsonBodyParser, (req, res) => {
+    try {
+        const { id, id1 } = req
+
+        checkConnection(id, id1 )
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
+        res.status(400).json({ message })
+    }
+})
+
+router.get('/candidates/:id', tokenVerifier, (req, res) => {
+    try {
+        const { id } = req
+
+        getCandidates(id)
+            .then(candidates => res.json(candidates))
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
+        res.status(400).json({ message })
+    }
+})
+
+router.post('/upload/:id', tokenVerifier, (req, res) => {
+
+    const { params: { id } } = req
+    const busboy = new Busboy({ headers: req.headers })
+
+    busboy.on('file', async(fieldname, file, filename, encoding, mimetype) => {
+        filename = 'profile'
+        await saveProfileImage(id, file, filename)
+    })
+
+    busboy.on('finish', () => {
+        res.end("That's all folks!")
+    })
+
+    return req.pipe(busboy)
+})
+
+router.get('/profileimage/:id', tokenVerifier, async(req, res) => {
+
+    const { params: { id } } = req
+    const stream = await loadProfileImage(id)
+    res.setHeader('Content-Type', 'image/jpeg')
+    return stream.pipe(res)
+})
+
+router.get('/profileimageUrl/:id', tokenVerifier, async(req, res) => {
+
+    const { params: { id } } = req
+    const imageUrl = await loadProfileImageUrl(id)
+    res.json({ imageUrl })
+})
+
+
+
+
+
 
 module.exports = router

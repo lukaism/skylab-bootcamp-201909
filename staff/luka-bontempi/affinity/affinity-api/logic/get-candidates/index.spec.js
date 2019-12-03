@@ -55,7 +55,7 @@ describe('logic - get candidates', () => {
             // if (i > 9) {
             //     coordinates[0] += (i*4 + 1) / 10
             //     coordinates[1] += (i*4 + 1) / 10
-                
+
             // }
             const user = {
                 name: `name-${random()}`,
@@ -70,7 +70,7 @@ describe('logic - get candidates', () => {
                 location: { type: "Point", coordinates: coordinates },
                 radius: 4
             }
-            
+
             insertions.push(user)
 
             names.push(user.name)
@@ -87,15 +87,44 @@ describe('logic - get candidates', () => {
         }
 
         await User.insertMany(insertions)
+        // insertions.forEach(candidate => {
+        //     candidate.id = candidate._id.toString()
+        //     delete candidate._id
+        // })
 
     })
 
     it('should succeed on correct user id', async () => {
         const candidates = await getCandidates(id)
+        debugger
 
         expect(candidates).to.exist
         expect(candidates).to.be.an('array')
-        expect(candidates).to.have.deep.members(insertions)
+        // expect(candidates).to.include.deep.members(insertions)
+        candidates.forEach(candidate => {
+            expect(candidate.name).to.exist
+            expect(candidate).to.exist
+            // expect(candidate.id).to.be.oneOf(id)
+            expect(candidate.id).to.be.a('string')
+            expect(candidate._id).to.not.exist
+            expect(candidate.name).to.be.oneOf(names)
+            expect(candidate.name).to.be.a('string')
+            expect(candidate.surname).to.be.oneOf(surnames)
+            expect(candidate.surname).to.be.a('string')
+            expect(candidate.email).to.be.oneOf(emails)
+            expect(candidate.email).to.be.a('string')
+            expect(candidate.username).to.be.oneOf(usernames)
+            expect(candidate.username).to.be.a('string')
+            expect(candidate.genderId).to.be.oneOf(genderIds)
+            expect(candidate.genderId).to.be.a('string')
+            expect(candidate.description).to.be.oneOf(descriptions)
+            expect(candidate.description).to.be.a('string')
+            expect(candidate.geometric).to.be.a('array')
+            // expect(candidate.birthdate).to.be.oneOf(birthdates)
+            // expect(user.birthdate).to.be.a.dateString()
+            expect(user.lastAccess).to.exist
+            expect(user.lastAccess).to.be.an.instanceOf(Date)
+        });
         candidates.forEach(elem => expect(elem).to.be.an('object'))
         // candidates.forEach(elem => expect(insertions).to.contain(elem))
 

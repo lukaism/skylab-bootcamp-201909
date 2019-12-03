@@ -1,7 +1,7 @@
 const { validate, errors: { ConflictError, NotFoundError } } = require('affinity-util')
 const { ObjectId, models: { User } } = require('affinity-data')
 
-module.exports = function (id, name, surname, genderId, geometric, description, birthdate) {
+module.exports = function (id, name, surname, genderId, geometric, description, day, month, year, radius) {
     validate.string(id)
     validate.string.notVoid('id', id)
     if (!ObjectId.isValid(id)) throw  ContentError(`${id} is not a valid id`)
@@ -26,16 +26,34 @@ module.exports = function (id, name, surname, genderId, geometric, description, 
         validate.string(description)
         validate.string.notVoid('description', description)
     }
-    if (birthdate) {
-        validate.object(birthdate)
+    if (day) {
+        validate.string(day)
+        validate.string.notVoid('day', day)
+    }
+    if (month) {
+        validate.string(day)
+        validate.string.notVoid('month', month)
+    }
+    if (year) {
+        validate.string(year)
+        validate.string.notVoid('year', year)
+    }
+    if (radius) {
+        validate.number(year)
+
     }
 
     return (async () => {
         const user = await User.findById(id)
 
         if (!user) throw  NotFoundError(`user with id ${id} not found`)
-
+        debugger
         const update = {}
+        
+
+        
+        day && month && year &&  (birthdate = new Date(year, month-1, day))
+        
 
         name && (update.name = name)
         surname && (update.surname = surname)
@@ -43,6 +61,7 @@ module.exports = function (id, name, surname, genderId, geometric, description, 
         geometric && (update.geometric = geometric)
         description && (update.description = description)
         birthdate && (update.birthdate = birthdate)
+        radius && (update.radius = radius)
         update.lastAccess =  new Date
 
         await User.updateOne({ _id: ObjectId(id) }, { $set: update })

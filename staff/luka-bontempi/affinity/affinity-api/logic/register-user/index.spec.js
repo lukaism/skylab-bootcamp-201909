@@ -9,7 +9,7 @@ const { database, models: { User } } = require('affinity-data')
 describe('logic - register user', () => {
     before(() => database.connect(TEST_DB_URL))
 
-    let name, surname, email, username, genderId, password, birthdate
+    let name, surname, email, username, genderId, password, day, month, year, birthdate
 
     beforeEach(() => {
         name = `name-${random()}`
@@ -18,14 +18,18 @@ describe('logic - register user', () => {
         username = `username-${random()}`
         genderId = `genderId-${random()}`
         password = `password-${random()}`
-        birthdate = new Date
-        
+        day = (Math.floor(Math.random() * (9 - 1))).toString()
+        month = (Math.floor(Math.random() * (9 - 1))).toString()
+        year = (Math.floor(Math.random() * (99 - 1)) +1900).toString()
+
+
+        birthdate = new Date(year, month-1, day)
 
         return User.deleteMany()
     })
 
     it('should succeed on correct credentials', async () => {
-        const response = await registerUser(name, surname, email, username, genderId, password, birthdate )
+        const response = await registerUser(name, surname, email, username, genderId, password, day, month, year )
 
         expect(response).to.be.undefined
 
@@ -48,7 +52,7 @@ describe('logic - register user', () => {
 
         it('should fail on already existing user', async () => {
             try {
-                await registerUser(name, surname, email, username, genderId,  password, birthdate)
+                await registerUser(name, surname, email, username, genderId, password, day, month, year )
 
                 throw Error('should not reach this point')
             } catch (error) {
@@ -127,10 +131,25 @@ describe('logic - register user', () => {
         expect(() => registerUser(name, surname, email, username, genderId,'')).to.throw(ContentError, 'password is empty or blank')
         expect(() => registerUser(name, surname, email, username, genderId, ' \t\r')).to.throw(ContentError, 'password is empty or blank')
         
-        expect(() => registerUser(name, surname, email, username, genderId, password, 1)).to.throw(TypeError, '1 is not a Object')
-        expect(() => registerUser(name, surname, email, username, genderId, password, true)).to.throw(TypeError, 'true is not a Object')
-        expect(() => registerUser(name, surname, email, username, genderId, password, undefined)).to.throw(TypeError, 'undefined is not a Object')
-        expect(() => registerUser(name, surname, email, username, genderId, password, null)).to.throw(TypeError, 'null is not a Object')
+        expect(() => registerUser(name, surname, email, username, genderId, password, 1)).to.throw(TypeError, '1 is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, true)).to.throw(TypeError, 'true is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, undefined)).to.throw(TypeError, 'undefined is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, null)).to.throw(TypeError, 'null is not a string')
+
+        expect(() => registerUser(name, surname, email, username, genderId, password, 1)).to.throw(TypeError, '1 is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, true)).to.throw(TypeError, 'true is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, undefined)).to.throw(TypeError, 'undefined is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, null)).to.throw(TypeError, 'null is not a string')
+
+        expect(() => registerUser(name, surname, email, username, genderId, password, day, 1)).to.throw(TypeError, '1 is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, day, true)).to.throw(TypeError, 'true is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, day, undefined)).to.throw(TypeError, 'undefined is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, day, null)).to.throw(TypeError, 'null is not a string')
+
+        expect(() => registerUser(name, surname, email, username, genderId, password, day, month, 1)).to.throw(TypeError, '1 is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, day, month, true)).to.throw(TypeError, 'true is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, day, month, undefined)).to.throw(TypeError, 'undefined is not a string')
+        expect(() => registerUser(name, surname, email, username, genderId, password, day, month, null)).to.throw(TypeError, 'null is not a string')
 
 
         // expect(() => registerUser(name, surname, email, username, genderId, password, '')).to.throw(ContentError, 'birthdate is empty or blank')

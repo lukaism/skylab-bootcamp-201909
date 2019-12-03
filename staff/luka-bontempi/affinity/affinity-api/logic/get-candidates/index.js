@@ -19,7 +19,7 @@ module.exports = function (id) {
             candidate.id = candidate._id.toString()
             delete candidate._id
             const { name, surname, email, username, genderId, description, geometric, password, birthdate, location: { coordinates }, radius } = candidate
-            candidate = { name, surname, email, username, genderId, description, geometric, password, birthdate, location: { type: "Point", coordinates: coordinates }, radius }
+            candidate = { id, name, surname, email, username, genderId, description, geometric, password, birthdate, location: { type: "Point", coordinates: coordinates }, radius }
             candodotes.push(candidate)
         }
        )

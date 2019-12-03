@@ -47,6 +47,7 @@ describe('logic - aprove-candidate', () => {
 
         id = user.id
         id1 = user1.id
+
     })
 
     it('should succeed on correct user id', async () => {

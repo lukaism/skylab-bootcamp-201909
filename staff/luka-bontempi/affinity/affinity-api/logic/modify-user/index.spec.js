@@ -12,7 +12,7 @@ describe('logic - modify user', () => {
     before(() => database.connect(TEST_DB_URL))
 
 
-    let name, surname, email, username, genderId, description, geometric, password
+    let name, surname, email, username, genderId, description, geometric, password, day, month, year
     
 
     beforeEach( async() => {
@@ -24,11 +24,13 @@ describe('logic - modify user', () => {
         genderId = `genderId-${random()}`
         geometric = [{interest:`interest-${random()}`,value:random()},{interest:`interest-${random()}`,value:random()}]
         description = `description-${random()}`
-        birthdate = new Date
+        day = (Math.floor(Math.random() * (9 - 1))).toString()
+        month = (Math.floor(Math.random() * (9 - 1))).toString()
+        year = (Math.floor(Math.random() * (99 - 1)) +1900).toString()
 
         await User.deleteMany()
 
-        const user = await User.create({ name, surname, email, username, genderId, description, geometric, password, birthdate })
+        const user = await User.create({ name, surname, email, username, genderId, description, geometric, password, birthdate})
 
         id = user.id
     })
@@ -39,9 +41,12 @@ describe('logic - modify user', () => {
         const newgenderId = `newgenderId-${random()}`
         const newgeometric = [{interest:`newinterest-${random()}`,value:random()},{interest:`newinterest-${random()}`,value:random()}]
         const newdescription = `newdescription-${random()}`
-        const newbirthdate = new Date
+        const newday = (Math.floor(Math.random() * (9 - 1))).toString()
+        const newmonth = (Math.floor(Math.random() * (9 - 1))).toString()
+        const  newyear = (Math.floor(Math.random() * (99 - 1)) +1900).toString()
 
-        const response = await modifyUser(id, newname, newsurname, newgenderId, newgeometric, newdescription, newbirthdate)
+
+        const response = await modifyUser(id, newname, newsurname, newgenderId, newgeometric, newdescription, newday, newmonth, newyear)
 
         expect(response).to.not.exist
 
