@@ -25,7 +25,7 @@ module.exports = new Schema({
         required: true
     },
     birthdate: {
-        type: Date,
+        type: Object,
         required: true
     },
     description: {
@@ -40,11 +40,6 @@ module.exports = new Schema({
         type: Array,
         
     },
-    candidates: {
-        type: Array,
-        default: []
-        
-    },
     rejected: {
         type: Array,
         default: []
@@ -57,14 +52,27 @@ module.exports = new Schema({
         type: Array,
         default: []
     },
-    loc: {
-        type: { type: String },
-        coordinates: [Number],
+    location: {
+        type: {
+            type: String, 
+            enum: ['Point'],
+        },
+        coordinates:{
+            type: [Number],
+            index:"2dsphere",
+            default: undefined
+        }
     },
     radius: {
         type: Number,
+        default: 4
+    },
+    profilePicture: {
+        type: String
     },
     lastAccess: {
         type: Date
     }
 })
+
+// user.index({location: '2dsphere'})

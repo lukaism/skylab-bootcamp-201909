@@ -1,6 +1,5 @@
 module.exports = {
     user: require('./user'),
-    interest: require('./interest'),
-    conversation: require('./conversation'),
+    chat: require('./chat'),
     message: require('./message')
 }
