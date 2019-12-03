@@ -39,7 +39,7 @@ module.exports = function (id, name, surname, genderId, geometric, description, 
         validate.string.notVoid('year', year)
     }
     if (radius) {
-        validate.number(year)
+        validate.number(radius)
 
     }
 
@@ -52,15 +52,15 @@ module.exports = function (id, name, surname, genderId, geometric, description, 
         
 
         
-        day && month && year &&  (birthdate = new Date(year, month-1, day))
         
-
+        
         name && (update.name = name)
         surname && (update.surname = surname)
         genderId && (update.genderId = genderId)
         geometric && (update.geometric = geometric)
         description && (update.description = description)
-        birthdate && (update.birthdate = birthdate)
+        // birthdate && (update.birthdate = birthdate)
+        day && month && year &&  (update.birthdate = new Date(year, month-1, day))
         radius && (update.radius = radius)
         update.lastAccess =  new Date
 

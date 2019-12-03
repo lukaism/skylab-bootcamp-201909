@@ -11,7 +11,7 @@ const jsonBodyParser = bodyParser.json()
 const router = Router()
 
 router.post('/', jsonBodyParser, (req, res) => {
-    const { body: {name, surname, email, username, genderId, password, day, month, year } } = req
+    const { body: { name, surname, email, username, genderId, password, day, month, year } } = req
 
     try {
         registerUser(name, surname, email, username, genderId, password, day, month, year)
@@ -73,11 +73,13 @@ router.get('/', tokenVerifier, (req, res) => {
     }
 })
 
-router.patch('/edit', tokenVerifier,jsonBodyParser, (req, res) => {
+router.patch('/edit', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
-        const { id, body: { name, surname, genderId, geometric, description, day, month, year} } = req
+        const { id, body: { name, surname, genderId, geometric, description, day, month, year, radius } } = req
+        debugger
 
         modifyUser(id, name, surname, genderId, geometric, description, day, month, year, radius)
+            .then(() => res.status(200).json({ message: 'Todo bien' }))
             .catch(error => {
                 const { message } = error
 
@@ -93,14 +95,14 @@ router.patch('/edit', tokenVerifier,jsonBodyParser, (req, res) => {
     }
 })
 
-router.patch('/uplocation', tokenVerifier,jsonBodyParser, (req, res) => {
+router.patch('/uplocation', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         debugger
-        const { id, body:{location} } = req
-        
+        const { id, body: { location } } = req
 
-        updateLocation(id, location )
-            .then(() => res.status(200).json({message:'Todo bien'}))
+
+        updateLocation(id, location)
+            .then(() => res.status(200).json({ message: 'Todo bien' }))
             .catch(error => {
                 const { message } = error
 
@@ -116,11 +118,12 @@ router.patch('/uplocation', tokenVerifier,jsonBodyParser, (req, res) => {
     }
 })
 
-router.patch('/reject', tokenVerifier,jsonBodyParser, (req, res) => {
+router.patch('/reject', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { id, id1 } = req
 
-        rejectCandidate(id, id1 )
+        rejectCandidate(id, id1)
+            .then(() => res.status(200).json({ message: 'Todo bien' }))
             .catch(error => {
                 const { message } = error
 
@@ -136,11 +139,12 @@ router.patch('/reject', tokenVerifier,jsonBodyParser, (req, res) => {
     }
 })
 
-router.patch('/aprove', tokenVerifier,jsonBodyParser, (req, res) => {
+router.patch('/aprove', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { id, id1 } = req
 
-        aproveCandidate(id, id1 )
+        aproveCandidate(id, id1)
+            .then(() => res.status(200).json({ message: 'Todo bien' }))
             .catch(error => {
                 const { message } = error
 
@@ -156,11 +160,12 @@ router.patch('/aprove', tokenVerifier,jsonBodyParser, (req, res) => {
     }
 })
 
-router.patch('/check', tokenVerifier,jsonBodyParser, (req, res) => {
+router.patch('/check', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { id, id1 } = req
 
-        checkConnection(id, id1 )
+        checkConnection(id, id1)
+            .then(() => res.status(200).json({ message: 'Todo bien' }))
             .catch(error => {
                 const { message } = error
 
@@ -202,7 +207,7 @@ router.post('/upload/:id', tokenVerifier, (req, res) => {
     const { params: { id } } = req
     const busboy = new Busboy({ headers: req.headers })
 
-    busboy.on('file', async(fieldname, file, filename, encoding, mimetype) => {
+    busboy.on('file', async (fieldname, file, filename, encoding, mimetype) => {
         filename = 'profile'
         await saveProfileImage(id, file, filename)
     })
@@ -214,7 +219,7 @@ router.post('/upload/:id', tokenVerifier, (req, res) => {
     return req.pipe(busboy)
 })
 
-router.get('/profileimage/:id', tokenVerifier, async(req, res) => {
+router.get('/profileimage/:id', tokenVerifier, async (req, res) => {
 
     const { params: { id } } = req
     const stream = await loadProfileImage(id)
@@ -222,7 +227,7 @@ router.get('/profileimage/:id', tokenVerifier, async(req, res) => {
     return stream.pipe(res)
 })
 
-router.get('/profileimageUrl/:id', tokenVerifier, async(req, res) => {
+router.get('/profileimageUrl/:id', tokenVerifier, async (req, res) => {
 
     const { params: { id } } = req
     const imageUrl = await loadProfileImageUrl(id)
