@@ -18,6 +18,10 @@ const validate = {
         this.typeOf('number', target)
     },
 
+    object(target) {
+        this.instanceOf(Object, target)
+    },
+
     boolean(target) {
         this.typeOf('boolean', target)
     },
@@ -42,5 +46,7 @@ const validate = {
 validate.string.notVoid = function (name, target) {
     if (!target.trim().length) throw new ContentError(`${name} is empty or blank`)
 }
+
+
 
 module.exports = validate

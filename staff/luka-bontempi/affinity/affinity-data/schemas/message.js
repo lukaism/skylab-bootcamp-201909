@@ -2,11 +2,11 @@ const { Schema } = require('mongoose')
 
 module.exports = new Schema({
     conversationId: {
-        type: ObjectId,
+        type: String,
         required: true
     },
     user: {
-        type: int,
+        type: String,
         required: true
     } ,
     message_body: {
