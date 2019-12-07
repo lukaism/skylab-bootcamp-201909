@@ -1,4 +1,4 @@
-module.exports = function(geometric) {
+module.exports = function (geometric) {
     let percentage = 0
     geometric.forEach(element => { percentage += element.proportion })
     if (percentage === 0) {

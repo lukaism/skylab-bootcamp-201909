@@ -5,22 +5,24 @@
  * @param {instructions} array an Object array, with building instructions in every Object.
  * 
  * @throws {TypeError} If array is not an array, or expression is not a function. TODO
- */ 
-module.exports = function(geometric) {
+ */
+const getRandomInt = require('./getRandomInt')
+
+module.exports = function (geometric) {
     let instructions = []
     geometric.forEach(element => {
         element.distribution.forEach(element2 => {
-            let direction = getRandomInt(1,3)
-            if (direction === 1){
+            let direction = getRandomInt(1, 3)
+            if (direction === 1) {
                 direction = 'row'
             }
-            if (direction === 2){
+            if (direction === 2) {
                 direction = 'column'
             }
             let block = {
                 size: element2,
                 //    color: element.interestId
-                color: 'pink',
+                interest: element.interestId,
                 direction: direction
             }
             instructions.push(block)

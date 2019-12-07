@@ -4,7 +4,8 @@ import { retrieveUser } from '../../logic'
 import { withRouter } from 'react-router-dom'
 import Geometric from '../Geometric'
 import Feedback from '../Feedback'
-const { buildInstructions, blockCounter, blocks, checkpercentage, defineBlocks, getRandomInt, setproportion } = require('affinity-util/block')
+const { blocks } = require('affinity-util/block')
+const { arrayShuffle } = require('affinity-util/polyfills')
 // const { polyfills: { blocks } } = require('affinity-util')
 
 
@@ -16,7 +17,7 @@ function MyProfile({ history }) {
     debugger
     const { token } = sessionStorage
     const [user, setUser] = useState()
-    const [instructions, SetInstructions] = useState()
+    const [instructions, SetInstructions] = useState([])
 
 
     useEffect(() => {
@@ -24,13 +25,18 @@ function MyProfile({ history }) {
         (async () => {
             if (token) {
                 const user = await retrieveUser(token)
-
-                const instructions = blocks(user.geometric)
                 setUser(user)
+                hongda(user)
             }
         })()
     })
+    async function hongda(user) {
+        let instructions = await blocks(user.geometric)
+        instructions = await arrayShuffle(instructions)
+        console.log(instructions) 
+        SetInstructions(instructions)
 
+    }
 
     function handleGoToMyProfile(event) {
         event.preventDefault()
@@ -61,7 +67,7 @@ function MyProfile({ history }) {
 
 
 
-    return <section classNameName="view my-profile">
+    return <section className="view my-profile">
 
         {user && <> <button className="logout "><i className="fas fa-sign-out-alt"></i></button>
             <article className="my-profile__info">

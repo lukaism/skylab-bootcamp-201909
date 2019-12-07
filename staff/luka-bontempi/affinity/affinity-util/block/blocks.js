@@ -5,12 +5,18 @@
  * @param {instructions} array an Object array, with building instructions in every Object.
  * 
  * @throws {TypeError} If array is not an array, or expression is not a function. TODO
- */ 
-module.exports = function(geometric) {
+ */
+let buildInstructions = require('./buildInstructions')
+let checkpercentage = require('./checkpercentage')
+let defineBlocks = require('./defineBlocks')
+let sortproportion = require('./sortproportion')
+
+module.exports = function (geometric) {
+    debugger
     let total = 0
     geometric.forEach(element => { total += (+element.value) })
     geometric.forEach(element => { element.proportion = Math.round((+element.value) / total * 100) })
-    checkpercentage(geometric)
+    geometric = checkpercentage(geometric)
     geometric.sort(sortproportion)
     defineBlocks(geometric)
     const instructions = buildInstructions(geometric)
