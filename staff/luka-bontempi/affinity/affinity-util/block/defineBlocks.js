@@ -6,6 +6,7 @@
  * 
  * @throws {TypeError} If array is not an array, or expression is not a function. TODO
  */ 
+const getRandomInt = require('./getRandomInt')
 module.exports = function(geometric) {
     debugger
     for (let i = 0; i < geometric.length; i++) {
