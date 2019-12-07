@@ -5,19 +5,22 @@ const registerUser = require('.')
 const { random } = Math
 const { errors: { ContentError } } = require('affinity-util')
 const { database, models: { User } } = require('affinity-data')
+const bcrypt = require('bcryptjs')
+
 
 describe('logic - register user', () => {
     before(() => database.connect(TEST_DB_URL))
 
-    let name, surname, email, username, genderId, password, day, month, year, birthdate
+    let name, surname, email, username, genderId, password, day, month, year, birthdate, hash
 
-    beforeEach(() => {
+    beforeEach( async() => {
         name = `name-${random()}`
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         username = `username-${random()}`
         genderId = `genderId-${random()}`
         password = `password-${random()}`
+        hash = await bcrypt.hash(password, 10)
         day = (Math.floor(Math.random() * (9 - 1))).toString()
         month = (Math.floor(Math.random() * (9 - 1))).toString()
         year = (Math.floor(Math.random() * (99 - 1)) +1900).toString()
@@ -41,9 +44,10 @@ describe('logic - register user', () => {
         expect(user.surname).to.equal(surname)
         expect(user.email).to.equal(email)
         expect(user.username).to.equal(username)
-        expect(user.password).to.equal(password)
         expect(user.genderId).to.equal(genderId)
         expect(user.birthdate).to.deep.equal(birthdate)
+        const match = await bcrypt.compare(password, user.password)
+        expect(match).to.be.true
         
     })
 

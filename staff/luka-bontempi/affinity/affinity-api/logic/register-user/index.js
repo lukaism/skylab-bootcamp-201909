@@ -1,5 +1,6 @@
 const { validate, errors: { ConflictError } } = require('affinity-util')
 const { models: { User } } = require('affinity-data')
+const bcrypt = require('bcryptjs')
 
 module.exports = function (name, surname, email, username, genderId, password, day, month, year) { debugger
     validate.string(name)
@@ -33,6 +34,9 @@ module.exports = function (name, surname, email, username, genderId, password, d
         
         const birthdate = new Date(year, month-1, day)
 
-        await User.create({ name, surname, email, username, genderId, password, birthdate })
+        const hash = await bcrypt.hash(password, 10)
+
+        await User.create({ name, surname, email, username, genderId, password: hash, birthdate })
+        debugger
     })()
 }

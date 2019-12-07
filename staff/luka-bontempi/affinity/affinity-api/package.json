@@ -18,6 +18,7 @@
   "dependencies": {
     "affinity-data": "file:../affinity-data",
     "affinity-util": "file:../affinity-util",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cordova": "^9.0.0",
     "dotenv": "^8.2.0",

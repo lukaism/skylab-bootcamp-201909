@@ -1,0 +1,16 @@
+module.exports = {
+    registerUser: require('./register-user'),
+    authenticateUser: require('./authenticate-user'),
+    retrieveUser: require('./retrieve-user'),
+    modifyUser: require('./modify-user'),
+    // updateLocation: require('./update-location'),
+    rejectCandidate: require('./reject-candidate'),
+    aproveCandidate: require('./aprove-candidate'),
+    checkConnection: require('./check-connection'),
+    getCandidates: require('./get-candidates'),
+    // createChat: require('./create-chat'),
+    // retrieveChat: require('./retrieve-chat'),
+    // retrieveChats: require('./retrive-chats'),
+    // sendMessage: require('./send-message'),
+    
+}

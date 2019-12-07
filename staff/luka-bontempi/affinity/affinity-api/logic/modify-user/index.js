@@ -65,5 +65,10 @@ module.exports = function (id, name, surname, genderId, geometric, description, 
         update.lastAccess =  new Date
 
         await User.updateOne({ _id: ObjectId(id) }, { $set: update })
+        
+        // const { name, surname, email, username, lastAccess, genderId, description, geometric, birthdate } = user.toObject()
+
+        // return { id, name, surname, email, username, genderId, description, lastAccess, geometric, birthdate }
+
     })()
 }

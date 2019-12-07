@@ -1,0 +1,47 @@
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+
+body
+    background-color: silver
+    
+.view
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: space-around
+    border: .3rem solid orange
+    border-style: dotted
+    background-size: cover
+    width: 100%
+    height: 100%
+    min-height: 100vh
+    min-width: 100vw
+    text-align: center
+
+.buton
+    display: grid
+    position: relative
+    margin-top: 100%
+    width: 100%
+    grid-template-columns: 33% 33% 33%
+    &__directions
+        color: white
+        background: black
+        border: .3rem solid back
+        border-radius: .5rem
+        padding: .5rem
+        width: 100%
+        font-size: 100%
+        height: 8vh
+
+.logout
+    border: .3rem solid black
+    align-content: flex-end
+    color: white
+    border-radius: .5rem
+    padding: .5rem
+    background: black
+    
+
