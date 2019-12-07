@@ -30,6 +30,7 @@ module.exports = new Schema({
     },
     description: {
         type: String,
+        default: ''
         
     },
     genderId: {

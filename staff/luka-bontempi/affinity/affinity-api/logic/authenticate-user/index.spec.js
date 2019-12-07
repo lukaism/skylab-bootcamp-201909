@@ -5,11 +5,12 @@ const authenticateUser = require('.')
 const { random } = Math
 const { errors: { ContentError, CredentialsError } } = require('affinity-util')
 const { database, models: { User } } = require('affinity-data')
+const bcrypt = require('bcryptjs')
 
 describe('logic - authenticate user', () => {
     before(() => database.connect(TEST_DB_URL))
 
-    let name, surname, email, username, genderId, birthdate, password
+    let name, surname, email, username, genderId, birthdate, password, hash
 
     beforeEach( async() => {
         name = `name-${random()}`
@@ -17,19 +18,21 @@ describe('logic - authenticate user', () => {
         email = `email-${random()}@mail.com`
         username = `username-${random()}`
         password = `password-${random()}`
+        hash = await bcrypt.hash(password, 10)
         genderId = `genderId-${random()}`
         birthdate = new Date
 
         await User.deleteMany()
 
-        const user = await User.create({ name, surname, email, username, genderId, password, birthdate })
+        const user = await User.create({ name, surname, email, username, genderId, password: hash, birthdate })
 
         id = user.id
     })
 
     it('should succeed on correct credentials', async () => {
+        debugger
         const userId = await authenticateUser(username, password)
-
+        debugger
         expect(userId).to.exist
         expect(typeof userId).to.equal('string')
         expect(userId.length).to.be.greaterThan(0)
