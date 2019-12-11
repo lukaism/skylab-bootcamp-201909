@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.sass'
 import InputRange from 'react-input-range'
 import "react-input-range/lib/css/index.css"
 import Feedback from '../Feedback'
-import { modifyUser } from '../../logic'
+import { modifyUser, updateLocation } from '../../logic'
 import { withRouter } from 'react-router-dom'
 const { polyfills: { filterz } } = require('affinity-util')
 
@@ -11,13 +11,43 @@ function Finish({ history }) {
     let error
     const { token } = sessionStorage
 
-    const [rangeValue1, setRangeValue1] = useState(0)
+    const [rangeValue1, setRangeValue1] = useState(50)
     const [rangeValue2, setRangeValue2] = useState(0)
     const [rangeValue3, setRangeValue3] = useState(0)
     const [rangeValue4, setRangeValue4] = useState(0)
     const [rangeValue5, setRangeValue5] = useState(0)
     const [rangeValueR, setRangeValueR] = useState(1)
+    const [position, setPosition] = useState([0, 0])
+    const [haveUsersLocation, setHaveUsersLocation] = useState(false)
+    let [view, setView] = useState('candidateprofile')
+    let options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    }
 
+    useEffect(() => {
+        debugger
+        (async () => {
+            if (!haveUsersLocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    setPosition([position.coords.latitude, position.coords.longitude])
+                    handleUpdateLocation([position.coords.latitude, position.coords.longitude])
+                    setHaveUsersLocation(true)
+                }, error => console.log(error.message), options)
+            }
+        })()
+    }, [])
+
+    async function handleUpdateLocation(position) {
+        try {
+            await updateLocation(token, position)
+
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     async function handleComplete(event) {
         // event.preventDefault()
@@ -101,7 +131,7 @@ function Finish({ history }) {
                     <div className="edit-profile__slider-block">
                         <InputRange
                             maxValue={100}
-                            minValue={0}
+                            minValue={1}
                             value={rangeValue1}
                             onChange={value => setRangeValue1(value)} />
                     </div>

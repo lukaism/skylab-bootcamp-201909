@@ -3,16 +3,12 @@
     margin: 0
     padding: 0
 
-body
-    background-color: silver
     
 .view
     display: flex
     flex-direction: column
     align-items: center
     justify-content: space-around
-    border: .3rem solid orange
-    border-style: dotted
     background-size: cover
     width: 100%
     height: 100%
@@ -20,15 +16,15 @@ body
     min-width: 100vw
     text-align: center
 
-.buton
+.footer
     display: grid
     position: relative
-    margin-top: 100%
+    margin-top: 0 auto
     width: 100%
-    grid-template-columns: 33% 33% 33%
+    grid-template-columns: repeat(5, 1fr)
     &__directions
         color: white
-        background: black
+        background: white
         border: .3rem solid back
         border-radius: .5rem
         padding: .5rem
@@ -43,5 +39,16 @@ body
     border-radius: .5rem
     padding: .5rem
     background: black
+
+$traveling: #244F75
+$music: #60BFBF
+$art: #8C4B7E
+$videogames: #F8BB44
+$sports: #F24B4B
+$movies: #1E3888
+$books: #6FFFE9
+$sdnr: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)
+$gastronomy:  #ec9ae1
+$nature: #00CC66
     
 

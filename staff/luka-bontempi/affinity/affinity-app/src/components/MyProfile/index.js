@@ -4,19 +4,27 @@ import { retrieveUser } from '../../logic'
 import { withRouter } from 'react-router-dom'
 import Geometric from '../Geometric'
 import Feedback from '../Feedback'
+import Description from '../Description'
+import Footer from '../Footer'
+// import Description from '../Description'
+import Detail from '../Detail'
 const { blocks } = require('affinity-util/block')
 const { arrayShuffle } = require('affinity-util/polyfills')
+
 // const { polyfills: { blocks } } = require('affinity-util')
 
 
 
 
+
 function MyProfile({ history }) {
+    debugger
     let error
     let today = new Date
-    debugger
+
     const { token } = sessionStorage
     const [user, setUser] = useState()
+    let [view, setView] = useState('myprofile')
     const [instructions, SetInstructions] = useState([])
 
 
@@ -29,62 +37,54 @@ function MyProfile({ history }) {
                 hongda(user)
             }
         })()
-    })
+    }, [setUser])
     async function hongda(user) {
+        debugger
         let instructions = await blocks(user.geometric)
         instructions = await arrayShuffle(instructions)
-        console.log(instructions) 
+        console.log(instructions)
         SetInstructions(instructions)
 
     }
 
-    function handleGoToMyProfile(event) {
+    function handleGoToDetail(event) {
         event.preventDefault()
-        history.push('/myprofile')
+        view = 'detail'
+        setView(view)
     }
-    function handleGoToChats(event) {
+
+    function handleGoToDescription(event) {
         event.preventDefault()
-        history.push('/chats')
+        view = 'description'
+        setView(view)
     }
-    function handleGoToCandidates(event) {
+
+    function handleGoToProfile(event) {
         event.preventDefault()
-        history.push('/candidates')
+        view = 'myprofile'
+        setView(view)
     }
-    function handleLogout() {
-
-        sessionStorage.clear()
-
-        handleGoBack()
-    }
-    function handleGoBack() {
-
-        history.push('/')
-    }
-
-
-
-
-
-
 
     return <section className="view my-profile">
 
-        {user && <> <button className="logout "><i className="fas fa-sign-out-alt"></i></button>
-            <article className="my-profile__info">
+        {user && view == 'myprofile' && <>
+            <article className="my-profile__info" onClick={handleGoToDetail}>
                 <Geometric instructions={instructions} />
             </article>
-            <div className="my-profile__geometric shape"></div>
-
-            <h2 className="my-profile__name">{user.name}</h2>
-            <h2 className="my-profile__age">{Math.floor(user.birthdate - today)}</h2>
-
-
-            <section className="buton">
-                <button className="buton__directions" onClick={handleGoToMyProfile} type="button" >My profile</button>
-                <button className="buton__directions" onClick={handleGoToMyProfile} type="button">Filter preferences</button>
-                <button className="buton__directions" onClick={handleGoToChats} type="button">Chats</button>
-            </section>
+            <h2 className="my-profile__name">{user.name} <span className="my-profile__age">({Math.floor((today - (new Date(user.birthdate))) / (60 * 60 * 24 * 365 * 1000))})</span></h2>
         </>}
+
+        {user && view == 'detail' && <> 
+            <article className="my-profile__detail" onClick={handleGoToDescription}>
+                <Detail user={user} />
+            </article>
+        </>}
+        {user && view == 'description' && <> <article className="my-profile__detail" onClick={handleGoToProfile}>
+            <Description user={user} />
+        </article>
+        </>}
+
+        <Footer />
 
         {error && <Feedback message={error} />}
     </section>
