@@ -9,7 +9,7 @@
 function blocks(geometric) {
     let total = 0
     geometric.forEach(element => { total += (+element.value) })
-    geometric.forEach(element => { element.proportion = Math.round((+element.value) / total * 100) })
+    geometric.forEach(element => { element.proportion = Math.ceil((+element.value) / total * 100) })
     checkpercentage(geometric)
     geometric.sort(sortproportion)
     defineBlocks(geometric)

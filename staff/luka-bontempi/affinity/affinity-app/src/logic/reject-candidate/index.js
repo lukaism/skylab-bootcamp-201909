@@ -12,7 +12,8 @@ module.exports = function (token, id) {
     return (async () => {
         const res = await call(`${API_URL}/users/reject`, {
             method: 'PATCH',
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
+            body: JSON.stringify({ id })
         })
         if (res.status === 200) {
             const user = JSON.parse(res.body)

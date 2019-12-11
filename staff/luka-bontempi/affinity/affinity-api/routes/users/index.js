@@ -120,7 +120,7 @@ router.patch('/uplocation', tokenVerifier, jsonBodyParser, (req, res) => {
 
 router.patch('/reject', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
-        const { id, id1 } = req
+        const { id, body: { id1} } = req
 
         rejectCandidate(id, id1)
             .then(() => res.status(200).json({ message: 'Todo bien' }))
@@ -140,8 +140,9 @@ router.patch('/reject', tokenVerifier, jsonBodyParser, (req, res) => {
 })
 
 router.patch('/aprove', tokenVerifier, jsonBodyParser, (req, res) => {
+    debugger
     try {
-        const { id, id1 } = req
+        const { id, body: { id1} } = req
 
         aproveCandidate(id, id1)
             .then(() => res.status(200).json({ message: 'Todo bien' }))
@@ -162,7 +163,7 @@ router.patch('/aprove', tokenVerifier, jsonBodyParser, (req, res) => {
 
 router.patch('/check', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
-        const { id, id1 } = req
+        const { id, body: { id1} } = req
 
         checkConnection(id, id1)
             .then(() => res.status(200).json({ message: 'Todo bien' }))
@@ -182,7 +183,7 @@ router.patch('/check', tokenVerifier, jsonBodyParser, (req, res) => {
 })
 
 router.get('/candidates/:id', tokenVerifier, (req, res) => {
-    try {
+    try {debugger
         const { id } = req
 
         getCandidates(id)

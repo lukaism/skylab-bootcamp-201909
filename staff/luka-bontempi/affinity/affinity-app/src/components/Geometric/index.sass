@@ -1,53 +1,53 @@
+@import "../../../public/variables"
 .geometric
+    list-style-type: none
+    border: .3rem solid black
+    background: black
+    opacity: 1
     display: grid
-    grid-template-columns:repeat(auto-fit, minmax(80px, 1fr))
-        grid-auto-rows: 80px
-        grid-auto-flow: dense
+    grid-gap: .4rem
+    grid-template-columns: repeat( auto-fit, minmax( 20px,1fr) )
+    grid-auto-rows: 20px
+    grid-auto-flow: dense
+    width: 250px
     &__block
-        width: 5vw
-        height: 5vw
 
-.block
-    &--sports
-        background: #ff0000
-    &--music
-        background: #0eaef8
-    &--movies
-        background: #f705ff
-    &--books
-        background: #ffffff
-    &--sdnr
-        background:  linear-gradient(to right, orange , yellow, green, cyan, blue, violet)
-    &--nature
-        background: #50e00dd2
-    &--traveling
-        background: #0004ff
-    &--videogames
-        background: #ffff01
-    &--art
-        background: #df9307
-    &--gastronomy
-        background: #ec9ae1
-    &--row1
-        grid-row: span 1
-    &--row2
-        grid-row: span 2
-    &--row3
-        grid-row: span 3
-    &--row4
-        grid-row: span 1
-    &--column2
-        grid-column: span 2
-    &--column3
-        grid-column: span 3
-    &--column4
-        grid-column: span 4
-    &__column16
-        grid-column: span 4
-        grid-row: span 4
-    &__row16
-        grid-column: span 4
-        grid-row: span 4
-        
-        
-
+    .block
+        &--music
+            background: $music
+        &--sports
+            background: $sports
+        &--movies
+            background: $movies
+        &--books
+            background: $books
+        &--sdnr
+            background: $sdnr
+        &--nature
+            background: $nature
+        &--traveling
+            background: $traveling
+        &--videogames
+            background: $videogames
+        &--art
+            background: $art
+        &--gastronomy
+            background: $gastronomy
+        &--row1
+            grid-row: span 1
+        &--row2
+            grid-row: span 2
+        &--row3
+            grid-row: span 3
+        &--row4
+            grid-row: span 4
+        &--column2
+            grid-column: span 2
+        &--column3
+            grid-column: span 3
+        &--column4
+            grid-column: span 4
+        &--column16
+            grid-area: -6/-6/-1/-1
+        &--row16
+            grid-area: -6/-6/-1/-1
