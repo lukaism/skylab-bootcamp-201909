@@ -214,7 +214,7 @@ function Edit({ history }) {
                 <textarea className="edit-profile__description-text" maxLength="500" name="description"></textarea>
             </article>
             <article className="edit-profile__radius">
-                <h4>Search Radius</h4>
+                <h4>Search Radius (1 to 100km)</h4>
                 <div className="edit-profile__slider-block radius">
                     <InputRange
                         maxValue={100}

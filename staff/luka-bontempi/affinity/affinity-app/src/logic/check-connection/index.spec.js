@@ -68,7 +68,7 @@ describe('logic - check-connection', () => {
     })
 
     it('should succeed on correct user id', async () => {
-        debugger
+
 
         let response = await checkconnection(id, id1)
         let usera = await User.findById(id)

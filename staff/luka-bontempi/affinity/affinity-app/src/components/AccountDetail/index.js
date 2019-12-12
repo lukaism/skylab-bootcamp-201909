@@ -43,7 +43,7 @@ function AccountDetail({ history, userId }) {
         })()
     }, [setAcount])
     async function makeInstructions(acount) {
-        debugger
+
         try {
             let instructions = blocks(acount.geometric)
             instructions = arrayShuffle(instructions)
