@@ -34,7 +34,7 @@ router.get('/retrievechat/:chatId', tokenVerifier, (req, res) => {
         const { params: { chatId } } = req
 
         retrieveChat(chatId)
-            .then(messages => res.status(201).json({ messages }))
+            .then(messages => res.status(200).json( messages ))
             .catch(error => {
                 const { message } = error
 
@@ -53,7 +53,7 @@ router.get('/retrievechats', tokenVerifier, (req, res) => {
         const { id } = req
 
         retrieveChats(id)
-            .then(id => res.status(201).json({ id }))
+            .then(chats => res.status(200).json(chats))
             .catch(error => {
                 const { message } = error
 
@@ -68,7 +68,7 @@ router.get('/retrievechats', tokenVerifier, (req, res) => {
 })
 
 
-router.post('/sendmessage', tokenVerifier, jsonBodyParser, (req, res) => {
+router.put('/sendmessage', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { id, body: { body, chatId } } = req
 

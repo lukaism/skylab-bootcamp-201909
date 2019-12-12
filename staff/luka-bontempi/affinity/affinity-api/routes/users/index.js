@@ -72,6 +72,26 @@ router.get('/', tokenVerifier, (req, res) => {
         res.status(400).json({ message })
     }
 })
+router.get('/cand', tokenVerifier, (req, res) => {
+    try {
+        const { body: { id } } = req
+
+        retrieveUser(id)
+            .then(user => res.json(user))
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
+        res.status(400).json({ message })
+    }
+})
 
 router.patch('/edit', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
@@ -140,11 +160,10 @@ router.patch('/reject', tokenVerifier, jsonBodyParser, (req, res) => {
 })
 
 router.patch('/aprove', tokenVerifier, jsonBodyParser, (req, res) => {
-    debugger
     try {
         const { id, body: { id1} } = req
-
         aproveCandidate(id, id1)
+            
             .then(() => res.status(200).json({ message: 'Todo bien' }))
             .catch(error => {
                 const { message } = error
@@ -164,6 +183,8 @@ router.patch('/aprove', tokenVerifier, jsonBodyParser, (req, res) => {
 router.patch('/check', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { id, body: { id1} } = req
+        console.log(id)
+        console.log(id1)
 
         checkConnection(id, id1)
             .then(() => res.status(200).json({ message: 'Todo bien' }))

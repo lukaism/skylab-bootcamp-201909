@@ -7,7 +7,7 @@ module.exports = function (id1,id2) {
     if (!ObjectId.isValid(id1)) throw new ContentError(`${id1} is not a valid id`)
     validate.string(id2)
     validate.string.notVoid('id2', id2)
-    if (!ObjectId.isValid(id)) throw new ContentError(`${id2} is not a valid id`)
+    if (!ObjectId.isValid(id2)) throw new ContentError(`${id2} is not a valid id`)
 
     return (async () => {
         const user = await User.findById(id1)

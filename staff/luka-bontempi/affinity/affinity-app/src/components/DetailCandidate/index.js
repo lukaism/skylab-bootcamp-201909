@@ -5,12 +5,12 @@ import { withRouter } from 'react-router-dom'
 
 
 
-function Detail({ user }) {
+function Detail({ currentCandidate }) {
 
 
 
     return <section className="detail">
-            {user.geometric.map(interest => <article key={interest.id} className={` detail__interest detail-interest--${interest.interestId}`} >
+            {currentCandidate.geometric.map(interest => <article key={interest.id} className={` detail__interest detail-interest--${interest.interestId}`} >
                 <div className="detail__bg">
                     <h2 className="detail__title">{interest.interestId}</h2>
                     <p className="detail__description">{interest.description}</p>

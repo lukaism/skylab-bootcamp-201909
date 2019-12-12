@@ -16,8 +16,8 @@ module.exports = function (id) {
         await user.save()
 
 
-        const { name, surname, email, username, lastAccess, genderId, description, geometric, birthdate } = user.toObject()
-        return { id, name, surname, email, username, genderId, description, lastAccess, geometric, birthdate }
+        const { name, surname, email, username, lastAccess, genderId, description, geometric, birthdate, rejected, aproved, connections } = user.toObject()
+        return { id, name, surname, email, username, genderId, description, lastAccess, geometric, birthdate, rejected, aproved, connections }
 
     })()
 }

@@ -19,7 +19,17 @@ module.exports = function(userId1, userId2) {
         const user2 = await User.findById(userId2)
         if (!user2) throw new NotFoundError(`user with id ${userId2} not found`)
 
-        const chat = await Chat.create({ users: [ObjectId(userId1), ObjectId(userId2)] })
+        const _chat = await Chat.findOne({
+            users: {
+              $all: [ user1.id, user2.id],
+              $size: 2
+            }
+          });
+          debugger
+
+        if (_chat) return chatId=_chat._id 
+
+        chat = await Chat.create({ users: [ObjectId(userId1), ObjectId(userId2)] })
 
         return chat.id
     })()

@@ -22,11 +22,6 @@ module.exports = function (name, surname, email, username, genderId, password, d
     validate.string(year)
     validate.string.notVoid('year', year)
     
-
-
-    
-
-
     return (async () => {
         const user = await User.findOne({ username })
 

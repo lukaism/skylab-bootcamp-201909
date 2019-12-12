@@ -18,7 +18,7 @@ module.exports = function (id) {
         candidates.forEach(candidate => {
             candidate.id = candidate._id.toString()
             delete candidate._id
-            const { name, surname, email, username, genderId, description, geometric, password, birthdate, location: { coordinates }, radius } = candidate
+            const { id, name, surname, email, username, genderId, description, geometric, password, birthdate, location: { coordinates }, radius } = candidate
             candidate = { id, name, surname, email, username, genderId, description, geometric, password, birthdate, location: { type: "Point", coordinates: coordinates }, radius }
             candodotes.push(candidate)
         }

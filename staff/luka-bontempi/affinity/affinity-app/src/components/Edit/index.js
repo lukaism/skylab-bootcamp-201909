@@ -23,19 +23,11 @@ function Edit({ history }) {
     const [rangeValueR, setRangeValueR] = useState(1)
 
 
-
-
-
-
-    
-
-
     async function handleEdit(event) {
-        debugger
-        // event.preventDefault()
+        event.preventDefault()
         try {
-            debugger
-            console.log(event.target)
+
+
 
             let day, month, year, radius
 
@@ -68,6 +60,8 @@ function Edit({ history }) {
 
             await modifyUser(token, name, surname, genderId, geometric, description, day, month, year, radius)
 
+            history.push('/myprofile')
+
 
 
         } catch (error) {
@@ -78,10 +72,9 @@ function Edit({ history }) {
 
     return <section className="view edit-profile">
         <h1 className="edit-profile__title">Complete Profile</h1>
-        <div className="edit-profile__geometric shape"></div>
         <form className="edit-profile__form" onSubmit={handleEdit}>
             <section className="edit-profile__interests">
-                <h3>Interests</h3>
+                <h4 className="edit-profile__title">Interests</h4>
                 <article className="edit-profile__interest">
                     <select className="selector__interest" name="interest1" >
                         <option value="music">Music</option>
