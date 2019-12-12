@@ -2,7 +2,13 @@ const call = require('../../utils/call')
 const { validate, errors: { CredencialsError, NotFoundError } } = require('affinity-util')
 // const { env: { REACT_APP_API_URL: API_URL } } = process
 const API_URL = process.env.REACT_APP_API_URL
-
+/**
+ * checks whether the aproved candidate has aproved the user previously.
+ * 
+ * @param {*token}  token with user's id.
+ * @param {*id1}  id1 candidate's Id
+ * 
+ */
 module.exports = function (token, id1) {
     validate.string(token)
     validate.string.notVoid('token', token)

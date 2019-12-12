@@ -58,8 +58,8 @@ function ChatItem({ history, account: { _id: accountId, name, geometric }, chatI
     }
 
     return <div className="acc-resume"  >
-        <div onClick={onGoToUser}>
-        <Geometric className="acc-resume__geometric" instructions={instructions} onClick={onGoToUser} />
+        <div className="acc-resume__geometric-container" onClick={onGoToUser}>
+        
         </div>
         <div className=" acc-resume__info info">
             <p className=" info__username" onClick={handleGoChat}>{name}</p>

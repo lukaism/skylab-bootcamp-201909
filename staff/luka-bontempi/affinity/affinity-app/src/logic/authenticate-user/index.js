@@ -3,6 +3,14 @@ const { validate, errors: { CredentialsError } } = require('affinity-util')
 // const { env: { REACT_APP_API_URL: API_URL } } = process
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * generates a token on log in.
+ * 
+ * @param {*username}  user's username.
+ * @param {*password}  user's password
+ * 
+ * 
+ */
 
 module.exports = function (username, password) {
     validate.string(username)

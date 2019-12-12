@@ -3,24 +3,20 @@ const { validate, errors: { ConflictError } } = require('affinity-util')
 const API_URL = process.env.REACT_APP_API_URL
 
 /**
- * retrieves a chat a user is part of.
+ * retrieves all chats a user is part of.
  * 
- * @param {*userId}  user's id.
- * @param {*chatId}  chat's id.
+ * @param {*id}  user's id.
+ * @param {*token}  token with user's id.
  * 
- * @returns chat
+ * @returns chats
  */
-
-module.exports = function(token, chatId) {
-    validate.string(token)
-    validate.string.notVoid('token', token)
-
-    validate.string(chatId)
-    validate.string.notVoid('chatId', chatId)
+module.exports = function(id, token) {
+    validate.string(id)
+    validate.string.notVoid('id', id)
 
     return (async() => {
-        
-        const res = await call(`${API_URL}/chat/retrievechat/${chatId}`, {
+
+        const res = await call(`${API_URL}/users/cand/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -34,5 +30,4 @@ module.exports = function(token, chatId) {
         throw new Error(JSON.parse(res.body).message)
 
     })()
-
 }

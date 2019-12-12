@@ -3,20 +3,20 @@ const { validate, errors: { CredentialsError, NotFoundError } } = require('affin
 // const { env: { REACT_APP_API_URL: API_URL } } = process
 const API_URL = process.env.REACT_APP_API_URL
 
-module.exports = function (token, id1) {
+module.exports = function (token, id) {
+    debugger
     validate.string(token)
     validate.string.notVoid('token', token)
-    validate.string(id1)
-    validate.string.notVoid('id1', id1)
+    validate.string(id)
+    validate.string.notVoid('id', id)
 
     return (async () => {
-        const res = await call(`${API_URL}/users/cand`, {
+        const res = await call(`${API_URL}/users/cand/${id}`, {
             method: 'GET',
             headers: { 
-                'Authorization': `Bearer ${token}` ,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id1 })
+                'Authorization': `Bearer ${token}` 
+            }
+
         })
 
         if (res.status === 200) {

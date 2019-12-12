@@ -72,10 +72,10 @@ router.get('/', tokenVerifier, (req, res) => {
         res.status(400).json({ message })
     }
 })
-router.get('/cand', tokenVerifier, (req, res) => {
+router.get('/cand/:id', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
-        const { body: { id } } = req
-
+        const { params: { id } } = req
+        debugger
         retrieveUser(id)
             .then(user => res.json(user))
             .catch(error => {

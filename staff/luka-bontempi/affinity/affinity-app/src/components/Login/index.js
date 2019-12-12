@@ -1,7 +1,7 @@
 import React from 'react'
 import './index.sass'
 import Feedback from '../Feedback'
-import { authenticateUser } from '../../logic'
+import { authenticateUser, retrieveUser } from '../../logic'
 import { withRouter } from 'react-router-dom'
 
 function Login({ history }) {
@@ -15,6 +15,8 @@ function Login({ history }) {
 
             const token = await authenticateUser(username, password)
             sessionStorage.token = token
+            const user = await retrieveUser(token)
+            sessionStorage.id = user.id
             history.push('/finish')
 
         } catch (error) {
