@@ -13,5 +13,5 @@ module.exports = {
     retrieveChat: require('./retrieve-chat'),
     retrieveChats: require('./retrieve-chats'),
     sendMessage: require('./send-message'),
-    
+    retrieveSummaryUser: require('./retrieve-sumary-user')
 }

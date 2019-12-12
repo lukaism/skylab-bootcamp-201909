@@ -49,7 +49,6 @@ describe('logic - retrieveChats', () => {
         chats.forEach(element => {
             expect(element).to.exist
             expect(element.id).to.be.oneOf(chatsArray)
-            expect(element.users.toString()).to.equal(id1)
 
         })
     })
@@ -79,9 +78,10 @@ describe('logic - retrieveChats', () => {
         expect(() => retrieveChats(null)).to.throw(TypeError, 'null is not a string')
         expect(() => retrieveChats('')).to.throw(ContentError, 'userId is empty or blank')
         expect(() => retrieveChats(' \t\r')).to.throw(ContentError, 'userId is empty or blank')
-
     })
-
-
     after(() => Promise.all([User.deleteMany(), Chat.deleteMany()]).then(database.disconnect))
 })
+
+
+
+

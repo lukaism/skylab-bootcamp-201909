@@ -20,11 +20,11 @@ function Chat({ chatId }) {
 
 
     useEffect(() => {
-        if (typeof refresher !== 'number') refresher = setInterval(() => {
+                if (typeof refresher !== 'number') refresher = setInterval(() => {
             (async () => {
                 try {
                     setMessages(await retrieveChat(token, chatId))
-                    console.log(messages)
+                    //console.log(messages)
                 } catch (error) {
                     setError(error.message)
                 }
@@ -58,19 +58,12 @@ function Chat({ chatId }) {
 
 
     return <section className=" post ">
-        {/* <div className=" post__header ">
-        <img className=" post-image " src=" https://media.licdn.com/dms/image/C4D03AQGJs_fj9WmNsQ/profile-displayphoto-shrink_200_200/0?e=1579737600&amp;v=beta&amp;t=aXY597WUWHurjEtV8y9ORSngTUm7RYWjjGdoHvpUXCg " alt=" profile "/>
-        <div className=" header-info ">
-            <p className=" header-item header__user-username ">Julian Assange</p>
-            <p className=" header-item header__user-introduction ">Dramatic actor</p>
-        </div>
-    </div> */}
-
+       
         <ul>
             {messages && messages.map(message => <li key={message._id}> <Message message={message} /></li>)}
         </ul>
 
-        <section className="new-comment ">
+        <section className="new-comment">
 
             <form action=" " className="new-comment__form form" onSubmit={handleSendMessage}>
                 <textarea className="form__textarea " name="message" cols="30 " rows="2 " placeholder="send a comment here ... "></textarea>
@@ -78,7 +71,7 @@ function Chat({ chatId }) {
             </form>
         </section>
 
-        {error && <Feedback text={error} />}
+        {/* {error && <Feedback text={error} />} */}
         <Footer />
     </section>
 

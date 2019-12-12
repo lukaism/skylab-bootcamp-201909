@@ -3,6 +3,14 @@ const { validate, errors: { CredentialsError, ConflictError } } = require('affin
 // const { env: { REACT_APP_API_URL: API_URL } } = process
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * creates a chat between the user and a candidate.
+ * 
+ * @param {*token}  token with user's id.
+ * @param {*userId}  candidate's Id
+ * 
+ */
+
 module.exports = function(token, userId ) {
     validate.string(token)
     validate.string.notVoid('token', token)

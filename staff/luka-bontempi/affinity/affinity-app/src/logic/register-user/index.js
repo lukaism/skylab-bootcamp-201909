@@ -4,7 +4,20 @@ const { validate, errors: { ConflictError } } = require('affinity-util')
 const API_URL = process.env.REACT_APP_API_URL
 // const bcrypt = require('bcryptjs')
 
-
+/**
+ * Aproves a candidate, by updating said candidate's userId to the users information
+ * 
+ * @param {*name}  user's name
+ * @param {*surname}  user's surname
+ * @param {*email}  user's email
+ * @param {*username}  user's username
+ * @param {*genderId}  id1 candidate's Id
+ * @param {*password}  id1 candidate's Id
+ * @param {*day}  id1 candidate's Id
+ * @param {*month}  id1 candidate's Id
+ * @param {*year}  id1 candidate's Id
+ * 
+ */
 
 
 

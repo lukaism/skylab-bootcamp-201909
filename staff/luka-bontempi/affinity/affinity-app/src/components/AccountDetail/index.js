@@ -11,7 +11,6 @@ import Detail from '../Detail'
 const { blocks } = require('affinity-util/block')
 const { arrayShuffle } = require('affinity-util/polyfills')
 
-// const { polyfills: { blocks } } = require('affinity-util')
 
 
 
@@ -32,18 +31,29 @@ function AccountDetail({ history, userId }) {
 
         (async () => {
             if (token) {
-                const account = await retrieveCandidate(token, userId)
-                setAcount(acount)
-                makeInstructions(acount)
+                try {
+                    setAcount(await retrieveCandidate(token, userId))
+                    makeInstructions(acount)
+
+                } catch ({ error }) {
+                    console.log(error)
+
+                }
             }
         })()
     }, [setAcount])
     async function makeInstructions(acount) {
+        debugger
+        try {
+            let instructions = blocks(acount.geometric)
+            instructions = arrayShuffle(instructions)
+            console.log(instructions)
+            SetInstructions(instructions)
 
-        let instructions = await blocks(acount.geometric)
-        instructions = await arrayShuffle(instructions)
-        console.log(instructions)
-        SetInstructions(instructions)
+        } catch ({ error }) {
+            console.log(error)
+
+        }
 
     }
 
@@ -74,7 +84,7 @@ function AccountDetail({ history, userId }) {
             <h2 className="my-profile__name">{acount.name} <span className="my-profile__age">({Math.floor((today - (new Date(acount.birthdate))) / (60 * 60 * 24 * 365 * 1000))})</span></h2>
         </>}
 
-        {acount && view == 'detail' && <> 
+        {acount && view == 'detail' && <>
             <article className="my-profile__detail" onClick={handleGoToDescription}>
                 <Detail user={acount} />
             </article>

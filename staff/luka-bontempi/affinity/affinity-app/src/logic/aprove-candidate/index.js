@@ -3,6 +3,14 @@ const { validate, errors: { CredencialsError, NotFoundError } } = require('affin
 // const { env: { REACT_APP_API_URL: API_URL } } = process
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Aproves a candidate, by updating said candidate's userId to the users information
+ * 
+ * @param {*token}  token with user's id.
+ * @param {*id1}  id1 candidate's Id
+ * 
+ */
+
 module.exports = function (token, id1) {
     validate.string(token)
     validate.string.notVoid('token', token)

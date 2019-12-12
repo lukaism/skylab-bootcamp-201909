@@ -18,14 +18,12 @@ function Chats({history}){
         if (typeof chatsRefresher !== 'number' ) chatsRefresher = setInterval(()=>{
             (async()=>{
                 try{
-                    debugger
                     setChats(await retrieveChats(token))
-                    debugger
                 } catch({message}){
                     // console.log(message)
                 }
             })()
-        }, 4000);
+        }, 10000);
         (async()=>{
             try{
                 setChats(await retrieveChats(token))
@@ -38,7 +36,7 @@ function Chats({history}){
 
    
     return <div className="connections__container">   
-       { chats && chats.length>0 && <ul >
+       { chats && chats.length>0 && <ul ><h1>{console.log(chats)}</h1>
            <h1>{console.log(chats)}</h1>
             {chats.map(chat => <li  key={chat._id} > <ChatItem chatId={chat._id} account={chat.users[0]}/></li>)}
         </ul>}
