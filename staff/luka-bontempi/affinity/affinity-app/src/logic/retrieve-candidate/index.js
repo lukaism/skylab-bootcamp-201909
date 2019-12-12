@@ -4,7 +4,6 @@ const { validate, errors: { CredentialsError, NotFoundError } } = require('affin
 const API_URL = process.env.REACT_APP_API_URL
 
 module.exports = function (token, id) {
-    debugger
     validate.string(token)
     validate.string.notVoid('token', token)
     validate.string(id)

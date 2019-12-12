@@ -28,7 +28,7 @@ module.exports = function(token, userId ) {
             body: JSON.stringify({ userId })
         })
 
-        debugger
+
         if (res.status === 201) return JSON.parse(res.body)
 
         if (res.status === 409) throw new ConflictError(JSON.parse(res.body).message)

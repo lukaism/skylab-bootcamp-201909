@@ -93,7 +93,7 @@ function Scroller({ history }) {
     }
     async function handleAproveCandidate() {
         try {
-            debugger
+
             await aproveCandidate(token, currentCandidate.id)
             handleCheckConnection()
 

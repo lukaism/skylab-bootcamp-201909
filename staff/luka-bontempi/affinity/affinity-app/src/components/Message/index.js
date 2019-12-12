@@ -13,24 +13,27 @@ function Message({ history, message: { user: userId, body, date } }) {
 
     useEffect(() => {
         (async () => {
-            try { 
-                debugger
+            try {
+
                 const a = await retrieveSummaryUser(userId, token)
-                setUserData(a ) }
-            catch (error) { debugger }
+                setUserData(a)
+            }
+            catch ({error}) {
+                console.log(error)
+            }
             
         })()
     }, [setUserData])
-    
+
     function handleGoProfile(e) {
         e.preventDefault()
         history.push(`/users/${userId}`)
     }
-    
-    
-    
 
-    return <><h1>{console.log(userData,id,userId)}</h1> {userData && id !== userId && <section className={userId === id ? "comment comment--mine" : "comment"}>
+
+
+
+    return <><h1>{console.log(userData, id, userId)}</h1> {userData && id !== userId && <section className={userId === id ? "comment comment--mine" : "comment"}>
         <div className="comment__text text ">
             <p className="text__user-name ">{userData.name}</p>
             <p className="text__date ">{date}</p>

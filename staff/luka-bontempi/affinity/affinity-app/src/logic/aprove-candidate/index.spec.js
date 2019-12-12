@@ -51,7 +51,7 @@ describe('logic - aprove-candidate', () => {
     })
 
     it('should succeed on correct user id', async () => {
-        debugger
+
 
         user = await aprovecandidate(id,id1)
 
