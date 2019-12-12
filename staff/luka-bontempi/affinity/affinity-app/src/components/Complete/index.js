@@ -21,7 +21,7 @@ function Complete({ history }) {
 
     function handleAdd(event) {
         event.preventDefault()
-        debugger
+
         const values = [...fields];
         values.push({ value: 'hi' });
         setFields(values);
@@ -87,7 +87,7 @@ function Complete({ history }) {
         <div className="edit-profile__geometric shape"></div>
         <form className="edit-profile__form" onSubmit={() =>{
             console.log("peta aqui");handleComplete()}}>
-            {fields && fields.map((field, idx) => {debugger
+            {fields && fields.map((field, idx) => {
                 return (
                     <section className="edit-profile__interest" key={`${field}-${idx}`}>
                         <select className="selector__interest" name="interest" onChange={e => handleChange(idx, e)}>

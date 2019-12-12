@@ -12,7 +12,6 @@ let defineBlocks = require('./defineBlocks')
 let sortproportion = require('./sortproportion')
 
 module.exports = function (geometric) {
-    debugger
     let total = 0
     geometric.forEach(element => { total += (+element.value) })
     geometric.forEach(element => { element.proportion = Math.ceil((+element.value) / total * 100) })

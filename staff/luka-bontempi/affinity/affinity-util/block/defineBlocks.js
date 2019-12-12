@@ -8,7 +8,6 @@
  */ 
 const getRandomInt = require('./getRandomInt')
 module.exports = function(geometric) {
-    debugger
     for (let i = 0; i < geometric.length; i++) {
         if (i === 0) {
             let distribution = [16]

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './index.sass'
-import { retrieveUser } from '../../logic'
+import { retrieveCandidate } from '../../logic'
 import { withRouter } from 'react-router-dom'
 import Geometric from '../Geometric'
 import Feedback from '../Feedback'
@@ -17,13 +17,13 @@ const { arrayShuffle } = require('affinity-util/polyfills')
 
 
 
-function MyProfile({ history }) {
+function AccountDetail({ history, userId }) {
 
     let error
     let today = new Date
 
     const { token } = sessionStorage
-    const [user, setUser] = useState()
+    const [acount, setAcount] = useState()
     let [view, setView] = useState('myprofile')
     const [instructions, SetInstructions] = useState([])
 
@@ -32,15 +32,15 @@ function MyProfile({ history }) {
 
         (async () => {
             if (token) {
-                const user = await retrieveUser(token)
-                setUser(user)
-                makeInstructions(user)
+                const account = await retrieveCandidate(token, userId)
+                setAcount(acount)
+                makeInstructions(acount)
             }
         })()
-    }, [setUser])
-    async function makeInstructions(user) {
+    }, [setAcount])
+    async function makeInstructions(acount) {
 
-        let instructions = await blocks(user.geometric)
+        let instructions = await blocks(acount.geometric)
         instructions = await arrayShuffle(instructions)
         console.log(instructions)
         SetInstructions(instructions)
@@ -67,22 +67,20 @@ function MyProfile({ history }) {
 
     return <section className="view my-profile">
 
-        {user && view == 'myprofile' && <>
+        {acount && view == 'myprofile' && <>
             <article className="my-profile__info" onClick={handleGoToDetail}>
                 <Geometric instructions={instructions} />
             </article>
-            <h2 className="my-profile__name">{user.name} <span className="my-profile__age">({Math.floor((today - (new Date(user.birthdate))) / (60 * 60 * 24 * 365 * 1000))})</span></h2>
+            <h2 className="my-profile__name">{acount.name} <span className="my-profile__age">({Math.floor((today - (new Date(acount.birthdate))) / (60 * 60 * 24 * 365 * 1000))})</span></h2>
         </>}
 
-        
-
-        {user && view == 'detail' && <> 
+        {acount && view == 'detail' && <> 
             <article className="my-profile__detail" onClick={handleGoToDescription}>
-                <Detail user={user} />
+                <Detail user={acount} />
             </article>
         </>}
-        {user && view == 'description' && <> <article className="my-profile__description" onClick={handleGoToProfile}>
-            <Description user={user} />
+        {acount && view == 'description' && <> <article className="my-profile__description" onClick={handleGoToProfile}>
+            <Description user={acount} />
         </article>
         </>}
 
@@ -105,4 +103,4 @@ function MyProfile({ history }) {
 
         onBack()
     }}>Go back</a> */}
-export default withRouter(MyProfile)
+export default withRouter(AccountDetail)

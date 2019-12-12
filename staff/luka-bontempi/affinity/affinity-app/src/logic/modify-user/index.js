@@ -19,7 +19,7 @@ module.exports = function (token, name, surname, genderId, geometric, descriptio
         })
         if (res.status === 200) {
             const user = JSON.parse(res.body)
-
+            return
 
 
         }

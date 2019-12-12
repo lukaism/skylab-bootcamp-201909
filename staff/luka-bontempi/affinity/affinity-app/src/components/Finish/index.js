@@ -27,7 +27,6 @@ function Finish({ history }) {
     }
 
     useEffect(() => {
-        debugger
         (async () => {
             if (!haveUsersLocation) {
                 navigator.geolocation.getCurrentPosition(position => {
@@ -52,7 +51,6 @@ function Finish({ history }) {
     async function handleComplete(event) {
         // event.preventDefault()
         try {
-            debugger
             console.log(event.target)
 
             let name, surname, genderId, day, month, year, radius
@@ -78,7 +76,6 @@ function Finish({ history }) {
             interestP5.value = rangeValue5
             let geometric = [interestP1, interestP2, interestP3, interestP4, interestP5]
             geometric = filterz(geometric)
-
             await modifyUser(token, name, surname, genderId, geometric, description, day, month, year, radius)
 
             history.push('/myprofile')
@@ -245,7 +242,7 @@ function Finish({ history }) {
                         onChange={value => setRangeValueR(value)} />
                 </div>
             </article>
-            <button className="edit-profile__submit" type="submit"><i className="fas fa-door-open"></i></button>
+            <button className="edit-profile__submit" type="button"><i className="fas fa-door-open"></i></button>
         </form>
 
     </section>

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "affinity-util": "file:../affinity-util",
+    "moment": "^2.24.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-input-range": "^1.3.0",
